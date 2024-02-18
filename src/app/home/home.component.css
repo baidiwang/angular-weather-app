@@ -1,0 +1,46 @@
+.search {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.section-1 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.section-1 .title {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.section-1 .subtitle {
+  display: flex;
+  align-items: center;
+}
+
+.section-1 .temp {
+  font-size: 80px;
+}
+
+.section-1 .img {
+  width: 50px;
+  height: 50px;
+}
+
+
+ion-row ion-col ion-card {
+  height: 120px;
+  text-align: center;
+}
+
+svg {
+  display:block;
+}
+.two{fill:#FFCE00;}
+.one{fill:#ffb000;}
+.middle{fill:#FFFF00;}

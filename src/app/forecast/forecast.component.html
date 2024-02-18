@@ -1,0 +1,14 @@
+<h3 class="title" *ngIf="data">
+  Today is {{ data.current.condition.text | lowercase }}
+</h3>
+<ion-card>
+  <ion-row *ngIf="data" class="forecast-list">
+    <ng-container *ngFor="let item of data.forecast.forecastday[0].hour">
+      <ion-col class="forecast-item">
+        <ion-label>{{ item.time.split(" ")[1] }}</ion-label>
+        <ion-img [src]="item.condition.icon"></ion-img>
+        <ion-label class="temp">{{ item.temp_c }}°</ion-label>
+      </ion-col>
+    </ng-container>
+  </ion-row>
+</ion-card>

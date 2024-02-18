@@ -1,0 +1,19 @@
+.forecast-list {
+  flex-wrap: nowrap;
+  width: 700px;
+  overflow-x: auto;
+}
+
+.forecast-item {
+  margin: 10px;
+}
+
+.temp {
+  flex: initial;
+}
+
+.title {
+  margin: 10px;
+  font-weight: 600;
+  font-size: 20px;
+}

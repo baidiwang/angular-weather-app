@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Favorites</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-list *ngIf="data">
+      <ion-item *ngFor="let item of data">
+        <ion-img [src]="item.current.condition.icon"></ion-img>
+        <ion-label>{{item.location.name}}</ion-label>
+        <ion-label>{{item.location.localtime.split(' ')[1]}}</ion-label>
+        <ion-label>{{item.current.temp_c}}°</ion-label>
+        <ion-button (click)="removeFavorite(item.location.name)">Remove</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

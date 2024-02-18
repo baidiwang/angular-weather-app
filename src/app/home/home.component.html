@@ -1,0 +1,83 @@
+<ion-content>
+  <div class="search">
+    <ion-input [(ngModel)]="queryTemp" placeholder="Search text"></ion-input>
+    <ion-button (click)="handleSearch()">Search</ion-button>
+    <ion-button (click)="toFavorites()">
+      <ion-icon name="heart-circle"></ion-icon>
+      My Favorite Cities
+    </ion-button>
+  </div>
+  <div class="section-1" *ngIf="data">
+    <app-weather-icon [text]="data.current.condition.text"></app-weather-icon>
+    <div class="title">MY LOCATION</div>
+    <div class="subtitle" *ngIf="data && data.location">
+      <div>{{ data.location.name }}</div>
+      <ion-button
+        *ngIf="!favorites.includes(data.location.name)"
+        size="small"
+        fill="clear"
+        (click)="addToFavorite(data.location.name)"
+      >
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-button>
+      <ion-button
+        *ngIf="favorites.includes(data.location.name)"
+        size="small"
+        fill="clear"
+        (click)="removeFavorite(data.location.name)"
+      >
+        <ion-icon name="heart"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="temp" *ngIf="data && data.current">
+      {{ data.current.temp_c }}°
+    </div>
+    <ion-row *ngIf="data && data.current">
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Wind speed</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            {{ data.current.wind_mph }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Pressure</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            {{ data.current.pressure_mb }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Precipitation amount</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            {{ data.current.precip_mm }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Humidity</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            {{ data.current.humidity }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <app-forecast [query]="query"></app-forecast>
+  </div>
+</ion-content>
