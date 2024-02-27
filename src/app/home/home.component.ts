@@ -12,7 +12,7 @@ export class HomeComponent {
   query = "New York";
   queryTemp = "New York";
   data: any = null;
-  favorites: string[] = [];
+  favorites: any[] = [];
 
   constructor(
     private weatherService: WeatherService,
@@ -38,20 +38,28 @@ export class HomeComponent {
   }
 
   getFavorites() {
-    this.favorites = this.favoriteService.getAll()
+     this.favoriteService.getAll().subscribe((favorites: any) => {
+       this.favorites = favorites;
+     })
   }
 
-  addToFavorite(name: string) {
-    this.favoriteService.add(name);
-    this.getFavorites();
+  addToFavorite(favorite: string) {
+    this.favoriteService.add(favorite).subscribe(() => {
+      this.getFavorites();
+    });
   }
 
   removeFavorite(name: string) {
-    this.favoriteService.remove(name);
-    this.getFavorites();
+    this.favoriteService.remove(name).subscribe(() => {
+      this.getFavorites();
+    });
   }
 
   toFavorites() {
     this.router.navigateByUrl("/favorites")
+  }
+
+  get hasFavorite() {
+    return this.favorites.some((item: any) => item.name === this.data.location.name)
   }
 }

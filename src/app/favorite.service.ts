@@ -1,33 +1,28 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoriteService {
-  favorites: string[] = [];
+  BASE_URL = "http://localhost:8080/favorite";
 
-  constructor() {
-    let favorites: any = localStorage.getItem("favorites")
-    if (favorites) {
-      this.favorites = JSON.parse(favorites);
-    }
-  }
+  constructor(private httpClient: HttpClient) {}
 
   getAll() {
-    return this.favorites;
+    return this.httpClient.get(this.BASE_URL);
   }
 
-  add(name: string) {
-    this.favorites.push(name);
-    localStorage.setItem("favorites", JSON.stringify(this.favorites));
+  add(favorite: any) {
+    console.log(favorite)
+    return this.httpClient.post(this.BASE_URL, favorite);
   }
 
   remove(name: string) {
-    this.favorites = this.favorites.filter(item => item !== name);
-    localStorage.setItem("favorites", JSON.stringify(this.favorites));
+    return this.httpClient.delete(`${this.BASE_URL}/${name}`);
   }
 
   has(name: string) {
-    return !!this.favorites.find(item => item === name);
+    return this.httpClient.get(`${this.BASE_URL}/${name}`);
   }
 }

@@ -22,17 +22,19 @@ export class FavoritesComponent implements OnInit {
 
   getCurrentByFavorites() {
     this.data = [];
-    const favorites = this.favoriteService.getAll();
-    for (let i = 0; i < favorites.length; i++) {
-      this.weatherService.getCurrentWeather(favorites[i])
-        .subscribe(res => {
-          this.data.push(res);
-        })
-    }
+    this.favoriteService.getAll().subscribe((favorites: any) => {
+      for (let i = 0; i < favorites.length; i++) {
+        this.weatherService.getCurrentWeather(favorites[i].name)
+          .subscribe(res => {
+            this.data.push(res);
+          })
+      }
+    });
   }
 
   removeFavorite(name: string) {
-    this.favoriteService.remove(name);
-    this.getCurrentByFavorites();
+    this.favoriteService.remove(name).subscribe(() => {
+      this.getCurrentByFavorites();
+    });
   }
 }

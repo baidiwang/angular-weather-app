@@ -13,15 +13,15 @@
     <div class="subtitle" *ngIf="data && data.location">
       <div>{{ data.location.name }}</div>
       <ion-button
-        *ngIf="!favorites.includes(data.location.name)"
+        *ngIf="!hasFavorite"
         size="small"
         fill="clear"
-        (click)="addToFavorite(data.location.name)"
+        (click)="addToFavorite(data.location)"
       >
         <ion-icon name="heart-outline"></ion-icon>
       </ion-button>
       <ion-button
-        *ngIf="favorites.includes(data.location.name)"
+        *ngIf="hasFavorite"
         size="small"
         fill="clear"
         (click)="removeFavorite(data.location.name)"
