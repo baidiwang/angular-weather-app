@@ -1,33 +1,7 @@
 const express = require("express");
 const Favorite = require("../models/favorite");
+const {convertToXML} = require("../utils");
 const router = express.Router();
-
-function convertToXML(jsonObject, rootElement) {
-  let xml = '<?xml version="1.0" encoding="UTF-8"?>';
-  xml += `<${rootElement}>`;
-
-  const appendDataToXml = (data, parent) => {
-    for (const key in data) {
-      if (Array.isArray(data[key])) {
-        for (const item of data[key]) {
-          xml += `<${key}>`;
-          appendDataToXml(item, key);
-          xml += `</${key}>`;
-        }
-      } else if (data[key] instanceof Object) {
-        xml += `<${key}>`;
-        appendDataToXml(data[key], key);
-        xml += `</${key}>`;
-      } else {
-        xml += `<${key}>${data[key]}</${key}>`;
-      }
-    }
-  };
-
-  appendDataToXml(jsonObject, rootElement);
-  xml += `</${rootElement}>`;
-  return xml;
-}
 
 router.get("/", async (req, res) => {
   try {
@@ -35,7 +9,7 @@ router.get("/", async (req, res) => {
     const favorites = await Favorite.find({});
 
     if (format === "xml") {
-      const xml = convertToXML({ favorites }, "favorites");
+      const xml = convertToXML(favorites.map(f => ({ favorite: JSON.parse(JSON.stringify(f.toJSON())) })), "favorites");
       res.header("Content-Type", "application/xml");
       res.send(xml);
     } else {
@@ -52,7 +26,7 @@ router.get("/:name", async (req, res) => {
     const favorite = await Favorite.findOne({ name: req.params.name });
 
     if (format === "xml") {
-      const xml = convertToXML(favorite, "favorite");
+      const xml = convertToXML(JSON.parse(JSON.stringify(favorite.toJSON())), "favorite");
       res.header("Content-Type", "application/xml");
       res.send(xml);
     } else {

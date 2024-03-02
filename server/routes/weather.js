@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const {convertToXML} = require("../utils");
 
 const API_KEY = "9da61fef8f174472a3c111630231610";
 const BASE_URL = "http://api.weatherapi.com/v1";
@@ -16,16 +17,7 @@ router.get("/current-weather", async (req, res) => {
 
     if (format === "xml") {
       // Start XML string
-      let xml = '<?xml version="1.0" encoding="UTF-8"?>';
-      xml += "<currentWeather>";
-
-      // Add elements to XML string
-      for (const key in data) {
-        xml += `<${key}>${data[key]}</${key}>`;
-      }
-
-      // End XML string
-      xml += "</currentWeather>";
+      const xml = convertToXML(data, 'currentWeather');
 
       res.header("Content-Type", "application/xml");
       res.send(xml);
@@ -48,26 +40,7 @@ router.get("/forecast-weather", async (req, res) => {
 
     if (format === "xml") {
       // Start XML string
-      let xml = '<?xml version="1.0" encoding="UTF-8"?>';
-      xml += "<forecastWeather>";
-
-      // Recursively add elements to XML string
-      const appendDataToXml = (data, parent) => {
-        for (const key in data) {
-          if (data[key] instanceof Object) {
-            xml += `<${key}>`;
-            appendDataToXml(data[key], key); // Recursive call for nested objects
-            xml += `</${key}>`;
-          } else {
-            xml += `<${key}>${data[key]}</${key}>`;
-          }
-        }
-      };
-
-      appendDataToXml(data, "forecastWeather");
-
-      // End XML string
-      xml += "</forecastWeather>";
+      const xml = convertToXML(data, 'forecastWeather');
 
       res.header("Content-Type", "application/xml");
       res.send(xml);
