@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const Favorite = require("./models/favorite");
 
-const MONGODB_URL =
-  "mongodb+srv://baidiwang:baidiwang12345@cluster0.0mjpheu.mongodb.net/";
+const MONGODB_URL = process.env.MONGODB_URI;
 
 const initialFavorites = [
   {
