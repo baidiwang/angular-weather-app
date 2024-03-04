@@ -1,8 +1,7 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Favorite = require("./models/favorite");
 
-const MONGODB_URL =
-  "mongodb+srv://baidiwang:baidiwang12345@cluster0.0mjpheu.mongodb.net/";
+const MONGODB_URL = 'mongodb+srv://baidiwang:baidiwang12345@cluster0.0mjpheu.mongodb.net/';
 
 const initialFavorites = [
   {
@@ -20,8 +19,8 @@ const initialFavorites = [
     name: "Shanghai",
     region: "Shanghai",
     tz_id: "Asia/Shanghai",
-  },
-];
+  }
+]
 
 async function init() {
   await mongoose.connect(MONGODB_URL);
@@ -33,9 +32,10 @@ async function init() {
     await favorite.save();
   }
 
-  console.log("MongoDB Connected!");
+  console.log('MongoDB Connected!');
 }
 
+
 init().then(() => {
-  console.log("Data inserted");
-});
+  console.log('Data inserted');
+})
