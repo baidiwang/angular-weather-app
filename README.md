@@ -1,27 +1,43 @@
-# Angular Weather App
+# Weather Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
+## Overview
 
-## Development server
+This Weather Application provides real-time weather data and forecasts. It allows users to view current weather conditions, future forecasts, and manage a list of favorite locations.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Server Setup
 
-## Code scaffolding
+- Node.js and Express.js for the backend.
+- MongoDB for the database.
+- RESTful API supporting both JSON and XML formats.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Installation
 
-## Build
+To get started with this project, clone the repository and install the dependencies.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+git clone [repository_url]
+cd server
+npm install
+```
 
-## Running unit tests
+## Seeding the Database
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+cd server
+npm run seed
+```
 
-## Running end-to-end tests
+## Client Setup
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Angular for the frontend.
+- Services for handling HTTP requests to the backend.
 
-## Further help
+## API Endpoints
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- /weather/current-weather: Get current weather data.
+- /weather/forecast-weather: Get weather forecast data.
+- /favorite: Manage favorite locations.
+
+## Presentation slides:
+
+https://docs.google.com/presentation/d/1P1jSxdNlw7ZKKru_N0dNcgelRfNb9orBRpLUm0PiMGo/edit#slide=id.gc6f90357f_0_27
