@@ -2,6 +2,7 @@ const express = require("express");
 const { connectMongoDB } = require("./database");
 const cors = require("cors"); //use the cors middleware to set up the necessary headers that tell the browser it's safe to allow a web page from one origin (our Angular app) to access resources at another origin (our Node.js server).
 const app = express();
+require("dotenv").config();
 
 // Import the routing files for the favorite and weather endpoints.
 const favorite = require("./routes/favorite");
